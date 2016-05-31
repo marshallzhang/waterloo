@@ -286,7 +286,7 @@ status open
 
 \begin_layout Plain Layout
 Reasonable stochastic 
-\begin_inset Formula $\succeq_{i}$
+\begin_inset Formula $\succ_{i}$
 \end_inset
 
 -order
