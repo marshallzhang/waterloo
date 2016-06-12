@@ -6,7 +6,7 @@
 \use_default_options true
 \begin_modules
 theorems-ams-bytype
-theorems-sec-bytype
+theorems-ams-extended-bytype
 \end_modules
 \maintain_unincluded_children false
 \language english
@@ -29,10 +29,10 @@ theorems-sec-bytype
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing onehalf
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -56,10 +56,10 @@ theorems-sec-bytype
 \shortcut idx
 \color #008000
 \end_index
-\leftmargin 1.5cm
-\topmargin 1.5cm
-\rightmargin 1.5cm
-\bottommargin 1.5cm
+\leftmargin 2.5cm
+\topmargin 2.5cm
+\rightmargin 2.5cm
+\bottommargin 2.5cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -86,6 +86,118 @@ Marshall Zhang and Alice Zhao
 \end_layout
 
 \begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Co-operative education (co-op) work terms are offered by universities as
+ an opportunity for students to engage in practical work experience between
+ traditional academic terms.
+ Competition among both students and employers for co-op opportunities is
+ intense; as a result, many universities have implemented market-based mechanism
+s in an attempt to allocate opportunities optimally.
+\end_layout
+
+\begin_layout Standard
+Among the earliest universities to implement a market-based mechanism for
+ co-op placement was the University of Waterloo, located in Waterloo, Canada.
+ Today, the university's co-op program is the largest post-secondary co-op
+ program in the world, with about 6,000 undergraduates and employers being
+ matched to each other every semester.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "University of Waterloo, \"About Co-operative Education\"."
+target "https://uwaterloo.ca/co-operative-education/about-co-operative-education"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ The co-op programs of the University of British Columbia, the DeGroote
+ School of Business at McMaster University, the Wilfred Laurier University,
+ and Drexel University also use, with minor variations, the University of
+ Waterloo's matching mechanism to assign co-op work terms; we will refer
+ to the simplest version of these closely related mechanisms as the rank-sum
+ mechanism.
+\end_layout
+
+\begin_layout Standard
+In this paper, we study the properties of the rank-sum mechanism and assess
+ its fidelity to the stated design goals of efficiency, strategy-proofness,
+ and balance that the University of Waterloo set out to satisfy with its
+ matching mechanism.
+ In particular, we first demonstrate that any matching of students and employers
+ is a Nash equilibrium outcome of the rank-sum mechanism, showing along
+ the way that the rank-sum mechanism is neither efficient nor strategy-proof.
+ Then, 
+\end_layout
+
+\begin_layout Standard
+; a stylized version of such a mechanism proceeds as follows:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Preference revelation.
+ 
+\series default
+Students and employers submit numeric rankings, with 
+\begin_inset Formula $1$
+\end_inset
+
+ being the most favored, over all agents on the opposite side of the market.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Rank-sum matching.
+ 
+\series default
+Students and employers are matched in increasing order of the sum of their
+ mutual ranks, with ties in rank-sum being broken randomly.
+ Students and employers are removed from the market once they are matched.
+\end_layout
+
+\begin_layout Standard
+The mechanism terminates when all students and employers have been matched.
+ The only non-traditional aspect of the mechanism as described is the fact
+ that agents must rank every agent on the opposite side of the market i.e.
+ an agent cannot express the preference to remain unmatched.
+ This is an approximation to the mechanism at the University of Waterloo,
+ in which employers first indicate which students are unacceptable to them
+ before ranking the remaining students, and students are forced to rank
+ every employer which deemed them acceptable.
+ 
+\end_layout
+
+\begin_layout Standard
+We will refer to the above mechanism as the 
+\series bold
+rank-sum mechanism
+\series default
+.
+ Note that the rank-sum mechanism is an example of a priority matching mechanism
+ of the type studied in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "roth-1991"
+
+\end_inset
+
+; as such, 
+\end_layout
+
+\begin_layout Section
 The Model
 \end_layout
 
@@ -95,7 +207,7 @@ Let a
 market
 \series default
  be a tuple 
-\begin_inset Formula $\mathscr{M}=(S,E,P,Q)$
+\begin_inset Formula $\mathscr{M}=(S,E,\mathbb{P})$
 \end_inset
 
 .
@@ -112,74 +224,44 @@ market
 \end_inset
 
 , and 
-\begin_inset Formula $P=\{\succ_{s}\}_{s\in S}$
+\begin_inset Formula $\mathbb{P}=\{\mathbb{P}_{a}\}_{a\in S\cup E}$
 \end_inset
 
- and 
-\begin_inset Formula $Q=\{\succ_{e}\}_{e\in E}$
+ is the set of true preference relations of students and employers over
+ agents on the other side of the market.
+ We assume that all preferences are complete, transitive, and strict; unlike
+ traditional models, agents are not allowed to rank being unmatched above
+ being matched (this roughly approximates Waterloo's policy that students
+ must rank all employers who have ranked them).
+ Finally, let 
+\begin_inset Formula $r(b;\mathbb{P}_{a})$
 \end_inset
 
- are sets of preference relations of students and employers.
- We assume that for any 
-\begin_inset Formula $a\in S\cup E$
+ return the rank of an agent 
+\begin_inset Formula $b$
 \end_inset
 
-, 
-\begin_inset Formula $\succ_{i}$
+ on the other side of the market from 
+\begin_inset Formula $a$
 \end_inset
 
- is a complete, transitive, and strict preference relation over all agents
- on the other side of the market and not being matched, denoted by 
-\begin_inset Formula $\varnothing$
+ under the preference relation 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+; accordingly, let 
+\begin_inset Formula $r^{-1}(n;\mathbb{P}_{a})$
+\end_inset
+
+ return the agent who is the 
+\begin_inset Formula $n$
+\end_inset
+
+-th preferred choice under 
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
 .
- Furthermore, for any 
-\begin_inset Formula $s\in S$
-\end_inset
-
- and 
-\begin_inset Formula $e\in E$
-\end_inset
-
-, let 
-\begin_inset Formula $r(s;\succ_{e})$
-\end_inset
-
- be the rank of 
-\begin_inset Formula $s$
-\end_inset
-
- in 
-\begin_inset Formula $\succ_{e}$
-\end_inset
-
- (i.e.
- 
-\begin_inset Formula $r(s;\succ_{e})=1$
-\end_inset
-
- if 
-\begin_inset Formula $s$
-\end_inset
-
- is the most favored student under 
-\begin_inset Formula $\succ_{e}$
-\end_inset
-
-), where 
-\begin_inset Formula $r(s;\succ_{e})=\infty$
-\end_inset
-
- if 
-\begin_inset Formula $\varnothing\succ_{e}s$
-\end_inset
-
-, and let 
-\begin_inset Formula $r(e;\succ_{s})$
-\end_inset
-
- be similarly defined.
 \end_layout
 
 \begin_layout Standard
@@ -199,11 +281,7 @@ is a map from
 \begin_inset Formula $S\cup E$
 \end_inset
 
- to 
-\begin_inset Formula $S\cup E\cup\{\varnothing\}$
-\end_inset
-
- such that for any 
+ to itself such that for any 
 \begin_inset Formula $s\in S$
 \end_inset
 
@@ -215,14 +293,14 @@ is a map from
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\mu(s)\in E\cup\{\varnothing\}$
+\begin_inset Formula $\mu(s)\in E$
 \end_inset
 
 ,
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $\mu(e)\in S\cup\{\varnothing\}$
+\begin_inset Formula $\mu(e)\in S$
 \end_inset
 
 , and
@@ -257,8 +335,8 @@ random matching
 deterministic matching 
 \series default
 is a constant random matching (i.e.
- a random matching that realizes a particular matching on any outcome in
- the sample space).
+ a random matching that realizes a particular matching on every outcome
+ in the sample space).
  A 
 \series bold
 mechanism 
@@ -271,13 +349,22 @@ is a function
 \begin_inset Formula $\mathscr{M}$
 \end_inset
 
- to a (possibly random) matching 
-\begin_inset Formula $\varphi(\mathscr{M})$
+ and a set of stated preference relations (strategies) 
+\begin_inset Formula $P=\{P_{a}\}_{a\in S\cup E}$
+\end_inset
+
+ of students and employers, obtained via a preference revelation game, to
+ a random matching 
+\begin_inset Formula $\varphi(\mathscr{M},P)$
 \end_inset
 
 .
- Since the outcomes of the rank-sum mechanism are exclusively random matchings,
- we must have a way for agents to compare on random matching to another.
+ To compare random matchings, we introduce the notion of a reasonable stochastic
+ 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+-order.
 \end_layout
 
 \begin_layout Definition
@@ -286,7 +373,7 @@ status open
 
 \begin_layout Plain Layout
 Reasonable stochastic 
-\begin_inset Formula $\succeq_{i}$
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
 -order
@@ -295,14 +382,14 @@ Reasonable stochastic
 \end_inset
 
  A reasonable stochastic 
-\begin_inset Formula $\succ_{a}$
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
--order 
-\begin_inset Formula $\gtrdot_{a}$
+-order is any order 
+\begin_inset Formula $\gtrdot$
 \end_inset
 
- is an order over random matchings such that
+ over random matchings such that
 \end_layout
 
 \begin_deeper
@@ -316,11 +403,11 @@ if
 \end_inset
 
  are deterministic matchings and 
-\begin_inset Formula $\tilde{\mu}(a)\succ_{a}\tilde{\nu}(a)$
+\begin_inset Formula $\tilde{\mu}(a)\mathbb{P}_{a}\tilde{\nu}(a)$
 \end_inset
 
 , then 
-\begin_inset Formula $\tilde{\mu}\gtrdot_{a}\tilde{\mu}$
+\begin_inset Formula $\tilde{\mu}\gtrdot\tilde{\nu}$
 \end_inset
 
  and
@@ -331,20 +418,12 @@ if
 \begin_inset Formula $\tilde{\mu}_{i}$
 \end_inset
 
- deterministically matches 
-\begin_inset Formula $a$
-\end_inset
-
- to her 
-\begin_inset Formula $i$
-\end_inset
-
-th most favored choice under 
-\begin_inset Formula $\succeq_{a}$
+ is a deterministic matching such that 
+\begin_inset Formula $r(\tilde{\mu}_{i}(a),\mathbb{P}_{a})=i$
 \end_inset
 
  and 
-\begin_inset Formula $\tilde{\mu}_{j\leq i}$
+\begin_inset Formula $\tilde{\nu}$
 \end_inset
 
  matches 
@@ -356,7 +435,7 @@ th most favored choice under
 \end_inset
 
 th most favored match under 
-\begin_inset Formula $\succeq_{a}$
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
  for 
@@ -364,10 +443,20 @@ th most favored match under
 \end_inset
 
  with equal probability, then 
-\begin_inset Formula $\mu_{i}\gtrdot_{a}\tilde{\mu}_{j\leq i}$
+\begin_inset Formula $\tilde{\mu}_{i}\gtrdot\tilde{\nu}$
 \end_inset
 
 .
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Is this equivalent to statewise dominance or first-order stochastic dominance?
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -386,46 +475,75 @@ We will also say that for any random matchings
 
 
 \series bold
- stochastically 
-\begin_inset Formula $\succeq_{a}$
+ reasonably stochastically 
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
 -dominates 
 \begin_inset Formula $\tilde{\nu}$
 \end_inset
 
- in a reasonable way
+
 \series default
- if for any reasonable stochastic 
-\begin_inset Formula $\succeq_{a}$
+ if there exists a reasonable stochastic 
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
--order 
-\begin_inset Formula $\gtrdot_{a}$
+-orders 
+\begin_inset Formula $\gtrdot$
 \end_inset
 
-, 
-\begin_inset Formula $\tilde{\mu}\gtrdot_{a}\tilde{\nu}$
+ such that 
+\begin_inset Formula $\tilde{\mu}\gtrdot\tilde{\nu}$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Standard
-Finally, for a given market 
-\begin_inset Formula $\mathscr{M}=(S,E,P,Q)$
+Now, fix a mechanism 
+\begin_inset Formula $\varphi$
 \end_inset
 
-, a preference profile 
-\begin_inset Formula $\mathbb{P}_{s}$
+ and a market 
+\begin_inset Formula $\mathscr{M}$
 \end_inset
 
- stochastically 
+.
+ A strategy 
+\begin_inset Formula $P_{a}$
+\end_inset
+
+ is
+\series bold
+ reasonably stochastically dominant 
+\series default
+if for all strategy profiles 
+\begin_inset Formula $P_{-a}$
+\end_inset
+
+ and other strategies 
+\begin_inset Formula $P_{a}^{'}$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{a},P_{-a}))$
+\end_inset
+
+ reasonably stochastically 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+-dominates 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{a}^{'},P_{-a}))$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 It is easily seen that first-order stochastic 
-\begin_inset Formula $\succeq_{a}$
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
 -dominance is a reasonable stochastic order.
@@ -434,15 +552,15 @@ It is easily seen that first-order stochastic
 \end_inset
 
  stochastically 
-\begin_inset Formula $\succeq_{a}$
+\begin_inset Formula $\mathbb{P}_{a}$
 \end_inset
 
 -dominates 
 \begin_inset Formula $\tilde{\nu}$
 \end_inset
 
-, then any risk-averse or risk-neutral expected utility maximizer will always
- prefer 
+ in all reasonable ways, then any risk-averse or risk-neutral expected utility
+ maximizer will always prefer 
 \begin_inset Formula $\tilde{\mu}$
 \end_inset
 
@@ -453,8 +571,579 @@ It is easily seen that first-order stochastic
 .
 \end_layout
 
+\begin_layout Section
+The Rank-Sum Mechanism
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem-1"
+
+\end_inset
+
+No strategy is reasonably stochastically dominant for any agent in the rank-sum
+ preference revelation game.
+\end_layout
+
+\begin_layout Proof
+Fix a market 
+\begin_inset Formula $\mathscr{M}=(S,E,\mathbb{P})$
+\end_inset
+
+ and consider a student 
+\begin_inset Formula $s\in S$
+\end_inset
+
+.
+ We will show that for any strategy 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+, there exists a strategy profile 
+\begin_inset Formula $P_{-s}$
+\end_inset
+
+ such that for some alternative strategy 
+\begin_inset Formula $P_{s}^{'}\not=P_{s}$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s}^{'},P_{-s}))$
+\end_inset
+
+ is preferable to 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s},P_{-s}))$
+\end_inset
+
+ under any reasonable stochastic 
+\begin_inset Formula $\mathbb{P}_{s}$
+\end_inset
+
+-order.
+ 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+No strategy is reasonably stochastically dominant.
+\end_layout
+
+\begin_layout Plain Layout
+=> For all strategies 
+\begin_inset Formula $P_{a}$
+\end_inset
+
+, 
+\begin_inset Formula $P_{a}$
+\end_inset
+
+ is not reasonably stochastically dominant.
+\end_layout
+
+\begin_layout Plain Layout
+=> For all strategies 
+\begin_inset Formula $P_{a}$
+\end_inset
+
+, there exists a strategy profile 
+\begin_inset Formula $P_{-a}$
+\end_inset
+
+ so that 
+\begin_inset Formula $\varphi((S,E,\mathbb{P},(P_{a},P_{-a})))$
+\end_inset
+
+ does not reasonably stochastically 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+-dominates 
+\begin_inset Formula $\varphi((S,E,\mathbb{P},(P_{a}^{'},P_{-a})))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+=> For all strategies 
+\begin_inset Formula $P_{a}$
+\end_inset
+
+, there exists a strategy profile 
+\begin_inset Formula $P_{-a}$
+\end_inset
+
+ and alternative strategy 
+\begin_inset Formula $P_{a}^{'}$
+\end_inset
+
+ so that there exists some reasonable stochastic 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+-order under which 
+\begin_inset Formula $\varphi((S,E,\mathbb{P},(P_{a},P_{-a})))$
+\end_inset
+
+ is preferred less than 
+\begin_inset Formula $\varphi((S,E,\mathbb{P},(P_{a}^{'},P_{-a})))$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+To this end, we fix a strategy 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+, and define 
+\begin_inset Formula $e_{i}\coloneqq r^{-1}(i;\mathbb{P}_{s})$
+\end_inset
+
+ to be the 
+\begin_inset Formula $i$
+\end_inset
+
+th favored employer of 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+First, we suppose 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $r(e_{1};P_{s})=1$
+\end_inset
+
+.
+ Then, consider a strategy profile 
+\begin_inset Formula $P_{-s}$
+\end_inset
+
+ such that
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+every 
+\begin_inset Formula $s'\in S\setminus s$
+\end_inset
+
+ ranks 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ as her first choice,
+\end_layout
+
+\begin_layout Enumerate
+every 
+\begin_inset Formula $s'\in S\setminus s$
+\end_inset
+
+ ranks the employers in 
+\begin_inset Formula $E\setminus e_{1}$
+\end_inset
+
+ with a unique permutation of 
+\begin_inset Formula $(2,\dots,N)$
+\end_inset
+
+, so that there is some 
+\begin_inset Formula $\varsigma\in S$
+\end_inset
+
+ that has the same strategy as 
+\begin_inset Formula $s$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Enumerate
+every 
+\begin_inset Formula $e'\in E\setminus e_{1}$
+\end_inset
+
+ ranks 
+\begin_inset Formula $\varsigma$
+\end_inset
+
+ as their 
+\begin_inset Formula $N$
+\end_inset
+
+th choice, and otherwise assigns ranks so that rank-sums are equal to 
+\begin_inset Formula $N+1$
+\end_inset
+
+, and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ ranks 
+\begin_inset Formula $\varsigma$
+\end_inset
+
+ as her first choice, 
+\begin_inset Formula $s$
+\end_inset
+
+ as her second choice, and the students in 
+\begin_inset Formula $S\setminus\{s,\varsigma\}$
+\end_inset
+
+ arbitrarily.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+It can be easily verified that 
+\begin_inset Formula $P_{-s}$
+\end_inset
+
+ is a set of complete, transitive, and strict preference relations.
+ The rank-sum of the pair 
+\begin_inset Formula $(\varsigma,e_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $2$
+\end_inset
+
+, the rank-sum of 
+\begin_inset Formula $(s,e_{1})$
+\end_inset
+
+ is 
+\begin_inset Formula $3$
+\end_inset
+
+, and the rank-sum of every other pair by construction is 
+\begin_inset Formula $N+1$
+\end_inset
+
+.
+ Therefore, in 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s},P_{-s}))$
+\end_inset
+
+, 
+\begin_inset Formula $s$
+\end_inset
+
+ has an equal chance of being matched with every employer in 
+\begin_inset Formula $E\setminus e_{1}$
+\end_inset
+
+.
+ However, consider the strategy 
+\begin_inset Formula $P_{s}^{'}$
+\end_inset
+
+ in which 
+\begin_inset Formula $s$
+\end_inset
+
+ ranks 
+\begin_inset Formula $e_{2}$
+\end_inset
+
+ first and 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ second.
+ Then, in 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s}^{'},P_{-s}))$
+\end_inset
+
+, 
+\begin_inset Formula $s$
+\end_inset
+
+ is matched deterministically with 
+\begin_inset Formula $e_{2}$
+\end_inset
+
+.
+ Therefore, for any reasonable stochastic 
+\begin_inset Formula $\mathbb{P}_{s}$
+\end_inset
+
+-order, 
+\begin_inset Formula $s$
+\end_inset
+
+ prefers 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s}^{'},P_{-s}))$
+\end_inset
+
+ to 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s},P_{-s}))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Now, suppose 
+\begin_inset Formula $P_{s}$
+\end_inset
+
+ is such that 
+\begin_inset Formula $r(e_{1};P_{s})=R>1$
+\end_inset
+
+.
+ Then, consider a strategy profile 
+\begin_inset Formula $P_{-s}$
+\end_inset
+
+ such that 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+every 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ ranks 
+\begin_inset Formula $s$
+\end_inset
+
+ as her first choice and ranks the remaining students arbitrarily, and
+\end_layout
+
+\begin_layout Enumerate
+every 
+\begin_inset Formula $s\in S\setminus s$
+\end_inset
+
+ ranks 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ arbitrarily.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Then, the rank-sum of the pair 
+\begin_inset Formula $(s,r^{-1}(1;P_{s}))$
+\end_inset
+
+ is 
+\begin_inset Formula $2$
+\end_inset
+
+ and the rank-sum of every other pair is greater than 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ Therefore, in 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s},P_{-s}))$
+\end_inset
+
+, 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $r^{-1}(1;P_{s})\not=e_{1}$
+\end_inset
+
+ are matched deterministically.
+ However, consider the strategy 
+\begin_inset Formula $P_{s}^{'}$
+\end_inset
+
+ in which 
+\begin_inset Formula $s$
+\end_inset
+
+ ranks 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+ first and 
+\begin_inset Formula $r^{-1}(1;P_{s})$
+\end_inset
+
+ as her 
+\begin_inset Formula $R$
+\end_inset
+
+th most favored employer.
+ Then, in 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s}^{'},P_{-s}))$
+\end_inset
+
+, 
+\begin_inset Formula $s$
+\end_inset
+
+ is matched deterministically with 
+\begin_inset Formula $e_{1}$
+\end_inset
+
+.
+ Therefore, for any reasonable stochastic 
+\begin_inset Formula $\mathbb{P}_{s}$
+\end_inset
+
+-order, 
+\begin_inset Formula $s$
+\end_inset
+
+ prefers 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s}^{'},P_{-s}))$
+\end_inset
+
+ to 
+\begin_inset Formula $\varphi(\mathscr{M},(P_{s},P_{-s}))$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $s\in S$
+\end_inset
+
+ was arbitrary, we see that no student has a reasonably stochastically dominant
+ strategy; the same argument follows for arbitrary 
+\begin_inset Formula $e\in E$
+\end_inset
+
+, which proves the theorem.
+\end_layout
+
 \begin_layout Theorem
-asdf
+For any set of true preferences, the set of all deterministic matchings
+ 
+\begin_inset Formula $D$
+\end_inset
+
+ is a weak subset of the weak Nash equilibrium outcomes in the rank-sum
+ mechanism.
+\end_layout
+
+\begin_layout Proof
+Fix a market 
+\begin_inset Formula $\mathscr{M}=(S,E,\mathbb{P})$
+\end_inset
+
+ and consider any deterministic matching 
+\begin_inset Formula $\tilde{\mu}\in D$
+\end_inset
+
+.
+ By 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "lem-1"
+
+\end_inset
+
+, there are no reasonably stochastically dominant strategies for any agent,
+ and thus we will construct a strategy profile 
+\begin_inset Formula $P$
+\end_inset
+
+ for which 
+\begin_inset Formula $\varphi(\mathscr{M},P)=\tilde{\mu}$
+\end_inset
+
+ such that 
+\begin_inset Formula $P$
+\end_inset
+
+ is a weak Nash equilibrium in the rank-sum preference revelation game.
+ For simply consider the strategy profile 
+\begin_inset Formula $P$
+\end_inset
+
+ in which 
+\begin_inset Formula $s$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\mu}(s)$
+\end_inset
+
+ mutually rank each other as their first choices, for all 
+\begin_inset Formula $s\in S$
+\end_inset
+
+.
+ Then, 
+\begin_inset Formula $\varphi(\mathscr{M},P)=\tilde{\mu}$
+\end_inset
+
+ as desired.
+ Moreover, 
+\begin_inset Formula $P$
+\end_inset
+
+ is a weak Nash equilibrium since any unilateral deviation by 
+\begin_inset Formula $a$
+\end_inset
+
+ results in the rank-sum of 
+\begin_inset Formula $(a,\tilde{\mu}(a))$
+\end_inset
+
+ being greater than 
+\begin_inset Formula $2$
+\end_inset
+
+, while for every agent 
+\begin_inset Formula $a'\in S\cup E\setminus a$
+\end_inset
+
+, the rank-sum of 
+\begin_inset Formula $(a',\tilde{\mu}(a'))$
+\end_inset
+
+ remains 
+\begin_inset Formula $2$
+\end_inset
+
+.
+ Therefore, every agent 
+\begin_inset Formula $a'\in S\cup E\setminus a$
+\end_inset
+
+ remains matched to her original partner, which forces 
+\begin_inset Formula $a$
+\end_inset
+
+ to remain matched to her original partner regardless of her unilateral
+ deviation.
+\end_layout
+
+\begin_layout Section
+Conflicting Design Goals
 \end_layout
 
 \begin_layout Standard
@@ -463,22 +1152,550 @@ We consider some desirable properties of a mechanism
 \end_inset
 
 .
+ 
 \end_layout
 
 \begin_layout Definition
-A mechanism is Pareto efficient if, for any market 
-\begin_inset Formula $\mathscr{M}$
+Given a preference profile 
+\begin_inset Formula $\mathbb{P}$
+\end_inset
+
+, a random matching 
+\begin_inset Formula $\tilde{\mu}\in\mathscr{B}$
+\end_inset
+
+ is stochastically dominated by another random matching 
+\begin_inset Formula $\tilde{\nu}\in\mathscr{B}$
+\end_inset
+
+ if for all agents 
+\begin_inset Formula $a\in S\cup E$
 \end_inset
 
 , 
-\begin_inset Formula $\varphi(\mathscr{M})$
+\begin_inset Formula $\tilde{\mu}(a)\mbox{SD}(\mathbb{P}_{a})\tilde{\nu}(a)$
 \end_inset
 
- is Pareto efficient.
+, and 
+\begin_inset Formula $\tilde{\mu}\not=\tilde{\nu}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\tilde{\mu}$
+\end_inset
+
+ is ordinally efficient if it is not stochastically dominated by any other
+ random matching.
 \end_layout
 
 \begin_layout Standard
-Recall that a matching is Pareto efficient
+An efficient mechanism is desirable because it produces matches in which
+ no one can be made better off without making anybody worse off.
+ Another desirable property is strategy-proofness.
+\end_layout
+
+\begin_layout Definition
+A mechanism is strategy-proof if, for any market 
+\begin_inset Formula $\mathscr{M}=(S,E,\mathbb{P})$
+\end_inset
+
+, 
+\begin_inset Formula $\mathbb{P}_{a}$
+\end_inset
+
+ is a reasonably stochastically dominant strategy for every agent 
+\begin_inset Formula $a\in S\cup E$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Significant welfare losses result from the rank-sum mechanism being non-strategy
+-proof.
+ Finally, a notion of balance is desirable.
+\end_layout
+
+\begin_layout Definition
+A mechanism 
+\begin_inset Formula $\varphi$
+\end_inset
+
+ is balanced if for any market 
+\begin_inset Formula $\mathscr{M}$
+\end_inset
+
+ and any strategy profiles 
+\begin_inset Formula $P=\{P_{s}\}_{s\in S}\cup\{P_{e}\}_{e\in E}$
+\end_inset
+
+ and 
+\begin_inset Formula $P'=$
+\end_inset
+
+, 
+\begin_inset Formula $\varphi(\mathscr{M},P)=\varphi(\mathscr{M},P')$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\varphi((S,E,\mathbb{P}),P)=\varphi((E,S,\mathbb{P}),P_{swap})$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We characterize ordinal efficiency with the following lemma, defining the
+ relation 
+\begin_inset Formula $\tau_{s}(\tilde{\mu},\mathbb{P})$
+\end_inset
+
+ over 
+\begin_inset Formula $E$
+\end_inset
+
+ for some 
+\begin_inset Formula $s\in S$
+\end_inset
+
+ such that for any 
+\begin_inset Formula $e,e'\in E$
+\end_inset
+
+, 
+\begin_inset Formula $e\tau_{s}(\tilde{\mu},\mathbb{P})e'$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $e\succ_{s}e'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})_{se'}>0$
+\end_inset
+
+.
+ A relation 
+\begin_inset Formula $\tau_{e}(\tilde{\mu},\mathbb{P})$
+\end_inset
+
+ over 
+\begin_inset Formula $S$
+\end_inset
+
+ for some 
+\begin_inset Formula $e\in E$
+\end_inset
+
+ is similarly defined.
+ 
+\end_layout
+
+\begin_layout Standard
+Define 
+\begin_inset Formula $(s,e)\tau(\tilde{\mu},\mathbb{P})(s',e')$
+\end_inset
+
+ if and only if there exists
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $s^{*}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $e\succ_{s^{*}}e'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})_{s^{*}e'}>0$
+\end_inset
+
+, or
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $e^{*}\in E$
+\end_inset
+
+ such that 
+\begin_inset Formula $s\succ_{e^{*}}s'$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})_{s'e^{*}}>0$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma
+The random matching 
+\begin_inset Formula $\tilde{\mu}$
+\end_inset
+
+ is ordinally efficient with respect to 
+\begin_inset Formula $\mathbb{P}$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\tau(\tilde{\mu},\mathbb{P})$
+\end_inset
+
+ is acyclic.
+\end_layout
+
+\begin_layout Proof
+We first show that if 
+\begin_inset Formula $\tau\coloneqq\tau(\tilde{\mu},\mathbb{P})$
+\end_inset
+
+ has a cycle, 
+\begin_inset Formula $\tilde{\mu}$
+\end_inset
+
+ is stochastically dominated by another random matching.
+ For if 
+\begin_inset Formula $\tau$
+\end_inset
+
+ has a cycle i.e.
+ there are pairs 
+\begin_inset Formula $\{(s_{k},e_{k})\}_{k=1,\dots,N}$
+\end_inset
+
+ such that 
+\begin_inset Formula 
+\[
+(s_{N},e_{N})\tau\cdots\tau(s_{2},e_{2})\tau(s_{1},e_{1})=(s_{N},e_{N}),
+\]
+
+\end_inset
+
+then we can find pairs 
+\begin_inset Formula $(s_{k}^{*},e_{k}^{*})$
+\end_inset
+
+ so that 
+\begin_inset Formula $e_{k+1}\mathbb{P}_{s_{k}^{*}}e_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $s_{k+1}\mathbb{P}_{e_{k}^{*}}s_{k}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})_{s_{k}^{*}e_{k}}>0$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})_{s_{k}e*_{k}}>0$
+\end_inset
+
+ for all 
+\begin_inset Formula $k=1,\dots,N-1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Using these pairs, we can build the matrices
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $\Delta$
+\end_inset
+
+, such that 
+\begin_inset Formula $\Delta_{s_{k}^{*}e_{k}}=-\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta_{s_{k}^{*}e_{k+1}}=\delta$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,\dots,N-1$
+\end_inset
+
+, and the other entries of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ are 
+\begin_inset Formula $0$
+\end_inset
+
+, and
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $\Delta'$
+\end_inset
+
+, such that 
+\begin_inset Formula $\Delta_{s_{k}e_{k}^{*}}^{'}=-\delta$
+\end_inset
+
+ and 
+\begin_inset Formula $\Delta_{s_{k+1}e_{k}^{*}}^{'}=\delta$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,\dots,N-1$
+\end_inset
+
+, and the other entries of 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ are 
+\begin_inset Formula $0$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Note that 
+\begin_inset Formula $\Delta_{se}=0$
+\end_inset
+
+ if and only if 
+\begin_inset Formula $\Delta_{se}^{'}\not=0$
+\end_inset
+
+ for any 
+\begin_inset Formula $s\in S$
+\end_inset
+
+ and 
+\begin_inset Formula $e\in E$
+\end_inset
+
+.
+ Then, by construction 
+\begin_inset Formula $\mathcal{M}(\tilde{\mu})+\Delta+\Delta'$
+\end_inset
+
+ is a bistochastic matrix, and the associated random matching stochastically
+ dominates 
+\begin_inset Formula $\tilde{\mu}$
+\end_inset
+
+, since 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ shifts probability mass from 
+\begin_inset Formula $e_{k}$
+\end_inset
+
+ to a more preferred employer 
+\begin_inset Formula $e_{k+1}$
+\end_inset
+
+ for every 
+\begin_inset Formula $s_{k}^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $\Delta^{'}$
+\end_inset
+
+ acts analogously for every 
+\begin_inset Formula $e_{k}^{*}$
+\end_inset
+
+, and their non-zero entries do not coincide.
+\end_layout
+
+\begin_layout Proof
+Now, suppose 
+\begin_inset Formula $\tilde{\mu}$
+\end_inset
+
+ is stochastically dominated by 
+\begin_inset Formula $\tilde{\nu}$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\mathbb{P}$
+\end_inset
+
+.
+ We know there exists a student (employer) 
+\begin_inset Formula $s_{1}$
+\end_inset
+
+ such that 
+\begin_inset Formula $\tilde{\mu}(s_{1})\not=\tilde{\nu}(s_{1})$
+\end_inset
+
+, and that there are some employers 
+\begin_inset Formula $e_{1},e_{2}\in E$
+\end_inset
+
+ such that 
+\begin_inset Formula $e_{2}\succ_{s_{1}}e_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathcal{M}(\tilde{\nu})_{s_{1}e_{1}}<\mathcal{M}(\tilde{\mu})_{s_{1}e_{1}}$
+\end_inset
+
+, and 
+\begin_inset Formula $\mathcal{M}(\tilde{\nu})_{s_{1}e_{2}}>\mathcal{M}(\tilde{\mu})_{s_{1}e_{2}}$
+\end_inset
+
+.
+ So, 
+\begin_inset Formula $(s,e_{2})\tau(s',e_{1})$
+\end_inset
+
+ for any 
+\begin_inset Formula $s,s'\in S$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Now, we know there must be some agent 
+\begin_inset Formula $s_{2}\in S$
+\end_inset
+
+ such that 
+\begin_inset Formula $\mathcal{M}(\tilde{\nu})_{s_{2}e_{2}}<\mathcal{M}(\tilde{\mu})_{s_{2}e_{2}}$
+\end_inset
+
+ since every column must sum to 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ But then 
+\begin_inset Formula $\tilde{\nu}(s_{2})\not=\tilde{\mu}(s_{2})$
+\end_inset
+
+, and by stochastic domination, there must be some 
+\begin_inset Formula $e_{3}\in E$
+\end_inset
+
+ such that 
+\begin_inset Formula $e_{3}\succ_{s_{2}}e_{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathcal{M}(\tilde{\nu})_{s_{2}e_{3}}>\mathcal{M}(\tilde{\mu})_{s_{2}e_{3}}$
+\end_inset
+
+, which implies 
+\begin_inset Formula $(s,e_{3})\tau(s_{2},e_{2})\tau(s',e_{1})$
+\end_inset
+
+ for any 
+\begin_inset Formula $s,s'\in S$
+\end_inset
+
+.
+  
+\end_layout
+
+\begin_layout Theorem
+There is no mechanism that is stochastically Pareto efficient, strategy-proof,
+ and balanced.
+\end_layout
+
+\begin_layout Proof
+If 
+\begin_inset Formula $a\succ_{s}b$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in S\setminus s'$
+\end_inset
+
+ and 
+\begin_inset Formula $b\succ_{s'}a$
+\end_inset
+
+ and 
+\begin_inset Formula $s\succ_{a}s'$
+\end_inset
+
+, then 
+\begin_inset Formula $p_{s'a}=0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Strategy-proof and balanced
+\end_layout
+
+\end_inset
+
+The mechanism that randomly selects people
+\end_layout
+
+\begin_layout Standard
+asdf
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Efficient and strategy-proof
+\end_layout
+
+\end_inset
+
+Top Trading Cycles is efficient and strategy-proof.
+\end_layout
+
+\begin_layout Standard
+asdfadsf
+\end_layout
+
+\begin_layout Example
+\begin_inset Argument 1
+status open
+
+\begin_layout Plain Layout
+Efficient and balanced
+\end_layout
+
+\end_inset
+
+asdf
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bib"
+options "plainnat"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
